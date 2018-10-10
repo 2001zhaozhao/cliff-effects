@@ -306,23 +306,22 @@ const Summary = function ({ client, openFeedback, snippets }) {
   // ==================  
   // WARNING: WHITESPACE IS VERY IMPORTANT HERE. Read about JSX whitespace.
   // ==================
-  // Hmm, don't like having `<p>`s up here. Page structure not clear in return value.
 
   // "What could happen?"
   var detailsNow = (
-    <p>
+    <React.Fragment>
       {sn.i_nowEarn} {sn.i_beforeMoney}{toMoneyStr(current.earned)} {sn.i_eachTimeInterval}
       {` `} {sn.i_nowBenefitsTotalIs} {sn.i_beforeMoney}{round$(current.benefitsTotal)}{sn.i_period}
       {` `} {sn.i_nowTotalIs} {sn.i_beforeMoney}{round$(current.total)} {sn.i_eachTimeInterval}{sn.i_period}
-    </p>
+    </React.Fragment>
   );
 
   var detailsFuture = (
-    <p>
+    <React.Fragment>
       {sn.i_newEarn} {sn.i_beforeMoney}{toMoneyStr(future.earned)} {sn.i_eachTimeInterval}
       {` `} {sn.i_newBenefitsTotalIs} {sn.i_beforeMoney}{round$(future.benefitsTotal)} {sn.i_eachTimeInterval}{sn.i_period}
       {` `} {sn.i_newBenefitDetailsIntro}
-    </p>
+    </React.Fragment>
   );
 
   // List of benefits html list items
@@ -343,7 +342,7 @@ const Summary = function ({ client, openFeedback, snippets }) {
 
   // Ask for feedback
   var feedbackAsk = (
-    <p>
+    <React.Fragment>
       <span key = { `pre-ask` }>
         { snippets.i_feedbackAsk }
       </span>
@@ -354,7 +353,7 @@ const Summary = function ({ client, openFeedback, snippets }) {
         onClick = { openFeedback }>
         { snippets.i_submitFeedback }
       </Button>
-    </p>
+    </React.Fragment>
   );
 
   // Describe how totals change
@@ -398,12 +397,18 @@ const Summary = function ({ client, openFeedback, snippets }) {
 
       <div className = { `text-result-section` }>
         <Header>{sn.i_detailsHeader}</Header>
-        { detailsNow }
-        { detailsFuture }
+        <p>
+          { detailsNow }
+        </p>
+        <p>
+          { detailsFuture }
+        </p>
         <ul>
           { benefitList }
         </ul>
-        { feedbackAsk }
+        <p>
+          { feedbackAsk }
+        </p>
       </div>
 
       <div className = { `text-result-section` }>
